@@ -8,7 +8,7 @@
 
 set -e
 
-DEVICE=gtowifi
+DEVICE=apollo_p2
 VENDOR=samsung
 
 # Load extract_utils and do some sanity checks

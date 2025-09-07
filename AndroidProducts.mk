@@ -6,4 +6,8 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_gtowifi.mk
+    $(LOCAL_DIR)/lineage_apollo.mk
+
+COMMON_LUNCH_CHOICES := \
+    lineage_apollo-userdebug
+
