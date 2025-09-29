@@ -112,7 +112,7 @@ BOARD_ROOT_EXTRA_SYMLINKS := \
 # HIDL
 DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
 DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
-TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
+#TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 
 # Kernel
 BOARD_KERNEL_CMDLINE := androidboot.selinux=permissive androidboot.dtbo_idx=0,1,2 firmware_class.path=/vendor/etc/firmware
@@ -132,9 +132,9 @@ BOARD_MKBOOTIMG_ARGS += --board $(BOARD_KERNEL_ARCH) --kernel_offset $(BOARD_KER
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
-TARGET_KERNEL_SOURCE := kernel/samsung/sdm429
+TARGET_KERNEL_SOURCE := kernel/orangepi/apollo
 TARGET_KERNEL_CONFIG := lineageos_apollo_defconfig
-TARGET_KERNEL_VERSION := 4.9
+TARGET_KERNEL_VERSION := 5.4
 
 # Keymaster
 TARGET_PROVIDES_KEYMASTER := true
@@ -168,10 +168,13 @@ BOARD_VNDK_VERSION := current
 #include vendor/samsung/apollo/BoardConfigVendor.mk
 
 # Wifi
-BOARD_HAS_QCOM_WLAN := true
-BOARD_HAS_QCOM_WLAN_SDK := true
-BOARD_WLAN_DEVICE := qcwcn
+BOARD_HAS_QCOM_WLAN := false
+BOARD_HAS_QCOM_WLAN_SDK := false
+BOARD_WLAN_DEVICE := common
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+BOARD_WIRELESS_PACKAGES     += libwifi-hal-package
+-include hardware/aw/wireless/wlan/firmware/firmware.mk
+
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 BOARD_HOSTAPD_DRIVER := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
