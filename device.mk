@@ -36,15 +36,6 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/orangepi/apollo/common/wir
 include device/orangepi/apollo/configs/wireless/wireless_config.mk
 
 
-# Camera
-PRODUCT_COPY_FILES += \
-    $(LOCAL_MODULE_PATH)/camera/camera.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/camera.cfg \
-    $(LOCAL_MODULE_PATH)/camera/hawkview/sensor_list_cfg.ini:vendor/etc/hawkview/sensor_list_cfg.ini \
-    $(LOCAL_MODULE_PATH)/camera/init.camera.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.camera.rc \
-        $(LOCAL_MODULE_PATH)/camera/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
-    frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml \
-
-
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.3.vendor \
