@@ -87,3 +87,5 @@ PRODUCT_PACKAGES += \
     android.hardware.tv.cec@1.0-impl \
     hdmi_cec.apollo
 
+# Include dtbo creation
+PRODUCT_PACKAGES += dtboimage
