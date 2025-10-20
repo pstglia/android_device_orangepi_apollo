@@ -1,0 +1,24 @@
+# recovery.fstab for OrangePi Apollo (Allwinner sun50iw9p1)
+# Format: <src> <mnt_point> <type> <mnt_flags> <fs_mgr_flags>
+
+# Core partitions
+/dev/block/by-name/system        /system      ext4   ro,barrier=1     wait
+/dev/block/by-name/vendor        /vendor      ext4   ro,barrier=1     wait
+/dev/block/by-name/vendor_dlkm   /vendor_dlkm ext4   ro,barrier=1     wait
+/dev/block/by-name/product       /product     ext4   ro,barrier=1     wait
+
+# Data and metadata
+/dev/block/by-name/userdata      /data        f2fs   noatime,nosuid,nodev,discard,reserve_root=128000,resuid=0,resgid=1065  wait,check,formattable,quota,reservedsize=128M
+/dev/block/by-name/metadata      /metadata    ext4   nodev,noatime,nosuid,errors=panic                                     wait,check,formattable
+
+# Optional /oem or /persistent partitions
+/dev/block/by-name/media_data    /oem         vfat   ro,nodev,noatime,nosuid,context=u:object_r:oemfs:s0                    wait,check,formattable
+/dev/block/by-name/frp           /persistent  emmc   defaults                                                               wait
+
+# External SD and USB (vold-managed)
+#/devices/platform/*/4020000.sdmmc/mmc_host/mmc*  auto  auto   defaults   voldmanaged=extsd:auto
+#/devices/platform/**/usb*                        auto  auto   defaults   voldmanaged=usb:auto
+
+# Recovery storage mount (optional)
+/dev/block/by-name/userdata      /sdcard      vfat   defaults                                                               recoveryonly
+

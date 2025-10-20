@@ -18,6 +18,16 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml
 
+# Recovery & regular fstab
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/recovery/root/etc/recovery.fstab:root/system/etc/recovery.fstab \
+    $(LOCAL_PATH)/rootdir/etc/fstab.sun50iw9p1:root/system/etc/fstab.sun50iw9p1
+
+# Force vendor/dsp creation
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/vendor/dummy_create_vendor_dir.txt:root/vendor/dsp/dummy_create_vendor_dir.txt
+
+
 # wifi and bt configuration
 # 1. Wifi Configuration
 BOARD_WIFI_VENDOR := common
@@ -34,6 +44,9 @@ BOARD_BLUETOOTH_TTY := /dev/ttyAS1
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/orangepi/apollo/common/wireless/bluetooth
 # Must include after wifi/bt configuration
 include device/orangepi/apollo/configs/wireless/wireless_config.mk
+
+# Desabilita cache
+PRODUCT_BUILD_CACHE_IMAGE := false
 
 
 # DRM
