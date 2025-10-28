@@ -21,7 +21,10 @@ PRODUCT_COPY_FILES += \
 # Recovery & regular fstab
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery/root/etc/recovery.fstab:root/system/etc/recovery.fstab \
-    $(LOCAL_PATH)/rootdir/etc/fstab.sun50iw9p1:root/system/etc/fstab.sun50iw9p1
+    $(LOCAL_PATH)/rootdir/etc/fstab.apollo:root/system/etc/fstab.apollo \
+    $(LOCAL_PATH)/rootdir/etc/fstab.apollo:root/fstab.apollo \
+    $(LOCAL_PATH)/rootdir/etc/fstab.apollo:ramdisk/fstab.apollo
+
 
 # Force vendor/dsp creation
 #PRODUCT_COPY_FILES += \
