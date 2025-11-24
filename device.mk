@@ -105,3 +105,5 @@ PRODUCT_PACKAGES += \
 
 # Include dtbo creation
 PRODUCT_PACKAGES += dtboimage
+
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
