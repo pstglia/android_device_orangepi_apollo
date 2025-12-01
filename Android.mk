@@ -14,8 +14,8 @@ include $(CLEAR_VARS)
 
 
 #Dependencias
-$(INSTALLED_BOOTIMAGE_TARGET): dtboimage
-$(INSTALLED_RECOVERYIMAGE_TARGET): dtboimage
+$(INSTALLED_BOOTIMAGE_TARGET): dtbo.img
+$(INSTALLED_RECOVERYIMAGE_TARGET): dtbo.img
 
 
 # builds require us to create the mount points at compile time.

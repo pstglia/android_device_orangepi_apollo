@@ -104,6 +104,21 @@ PRODUCT_PACKAGES += \
     hdmi_cec.apollo
 
 # Include dtbo creation
-PRODUCT_PACKAGES += dtboimage
+PRODUCT_PACKAGES += dtbo.img
+
+# new gatekeeper HAL
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0-impl-aw \
+    android.hardware.gatekeeper@1.0-service-aw \
+    libgatekeeper \
+    gatekeeper.apollo \
+
+PRODUCT_PACKAGES += \
+        android.hardware.power-service-aw \
+    android.hardware.health@2.1-service \
+    android.hardware.health@2.1-impl \
+    android.hardware.usb@1.0-service.aw \
+
+
 
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
