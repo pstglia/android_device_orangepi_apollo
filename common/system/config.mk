@@ -121,16 +121,16 @@ PRODUCT_PACKAGES += \
 # call other makefile
 # 32bit android,you should define TARGET_ARCH := arm
 # 64bit android,you should define TARGET_ARCH := arm64
-TARGET_ARCH ?= arm
-ifeq ($(TARGET_ARCH),arm)
-$(call inherit-product, $(LOCAL_MODULE_PATH)/apollo_32_bit.mk)
-else ifeq ($(TARGET_ARCH),arm64)
-$(call inherit-product, $(LOCAL_MODULE_PATH)/apollo_64_bit.mk)
-endif
+#TARGET_ARCH ?= arm
+#ifeq ($(TARGET_ARCH),arm)
+#$(call inherit-product, $(LOCAL_MODULE_PATH)/apollo_32_bit.mk)
+#else ifeq ($(TARGET_ARCH),arm64)
+#$(call inherit-product, $(LOCAL_MODULE_PATH)/apollo_64_bit.mk)
+#endif
 
-$(call inherit-product, device/softwinner/common/pad.mk)
+#$(call inherit-product, device/orangepi/common/pad.mk)
 $(call inherit-product-if-exists, vendor/aw/public/tool.mk)
-$(call inherit-product-if-exists, device/softwinner/common/common.mk)
+$(call inherit-product-if-exists, device/orangepi/common/common.mk)
 
 # Enabling type-precise GC results in larger optimized DEX files.  The
 # additional storage requirements for ".odex" files can cause /system
@@ -172,20 +172,20 @@ PRODUCT_COPY_FILES += $(LOCAL_MODULE_PATH)/thermal_info_config.json:$(TARGET_COP
 $(call inherit-product-if-exists, vendor/aw/public/prebuild/lib/librild/radio_common.mk)
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_MODULE_PATH)/init.recovery.sun50iw9p1.rc:root/init.recovery.sun50iw9p1.rc \
-    $(LOCAL_MODULE_PATH)/init.recovery.sun50iw9p1.rc:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/init.recovery.sun50iw9p1.rc \
-    $(LOCAL_MODULE_PATH)/ueventd.sun50iw9p1.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc \
-    $(LOCAL_MODULE_PATH)/init.sun50iw9p1.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.sun50iw9p1.rc \
-    $(LOCAL_MODULE_PATH)/init.sun50iw9p1.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.sun50iw9p1.usb.rc \
+    $(LOCAL_MODULE_PATH)/init.recovery.apollo.rc:root/init.recovery.apollo.rc \
+    $(LOCAL_MODULE_PATH)/init.recovery.apollo.rc:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/init.recovery.apollo.rc \
+    $(LOCAL_MODULE_PATH)/ueventd.apollo.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc \
+    $(LOCAL_MODULE_PATH)/init.apollo.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.apollo.rc \
+    $(LOCAL_MODULE_PATH)/init.apollo.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.apollo.usb.rc \
     $(LOCAL_MODULE_PATH)/init.secondmodules.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.secondmodules.rc \
     $(LOCAL_MODULE_PATH)/init.scheduler.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.scheduler.rc \
 
 PRODUCT_COPY_FILES += \
-    device/softwinner/common/config/awbms_config:$(TARGET_COPY_OUT_VENDOR)/etc/awbms_config \
-    device/softwinner/common/config/tv_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/tv_core_hardware.xml \
+    device/orangepi/common/config/awbms_config:$(TARGET_COPY_OUT_VENDOR)/etc/awbms_config \
+    device/orangepi/common/config/tv_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/tv_core_hardware.xml \
     frameworks/native/data/etc/android.software.controls.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.controls.xml \
     $(LOCAL_MODULE_PATH)/preferred-apps/custom.xml:system/etc/preferred-apps/custom.xml \
-    device/softwinner/common/config/android.hardware.location.network.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.location.network.xml \
+    device/orangepi/common/config/android.hardware.location.network.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.location.network.xml \
     frameworks/native/data/etc/android.hardware.ethernet.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.ethernet.xml \
 
 # usb and backup permissions file
@@ -226,7 +226,7 @@ ifeq ($(CONFIG_LOW_RAM_DEVICE),true)
         dalvik.vm.heapminfree=512k \
         dalvik.vm.heapmaxfree=8m \
 
-    $(call inherit-product, device/softwinner/common/go_common.mk)
+    $(call inherit-product, device/orangepi/common/go_common.mk)
     $(call inherit-product, $(LOCAL_MODULE_PATH)/go_base.mk)
     # Mainline partner build config - low RAM
     OVERRIDE_TARGET_FLATTEN_APEX := true

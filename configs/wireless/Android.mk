@@ -7,7 +7,7 @@
 
 $(call define-copy-target,$(BOARD_WIRELESS_FILES))
 
-LOCAL_PATH := device/softwinner/common/config/wireless
+LOCAL_PATH := device/orangepi/common/config/wireless
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := wireless-package

@@ -4,6 +4,9 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 #
+TARGET_BOARD_IC := h618
+PRODUCT_BOARD := p2
+PRODUCT_PREBUILT_PATH := longan/out/$(TARGET_BOARD_IC)/$(PRODUCT_BOARD)/android
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -20,10 +23,10 @@ PRODUCT_COPY_FILES += \
 
 # Recovery & regular fstab
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/recovery/root/etc/recovery.fstab:root/system/etc/recovery.fstab \
-    $(LOCAL_PATH)/rootdir/etc/fstab.apollo:root/system/etc/fstab.apollo \
-    $(LOCAL_PATH)/rootdir/etc/fstab.apollo:root/fstab.apollo \
-    $(LOCAL_PATH)/rootdir/etc/fstab.apollo:ramdisk/fstab.apollo
+    $(LOCAL_PATH)/recovery/root/etc/recovery.fstab:root/system/etc/recovery.fstab
+#    $(LOCAL_PATH)/rootdir/etc/fstab.apollo:root/system/etc/fstab.apollo \
+#    $(LOCAL_PATH)/rootdir/etc/fstab.apollo:root/fstab.apollo \
+#    $(LOCAL_PATH)/rootdir/etc/fstab.apollo:ramdisk/fstab.apollo
 
 
 # Force vendor/dsp creation
@@ -119,6 +122,8 @@ PRODUCT_PACKAGES += \
     android.hardware.health@2.1-impl \
     android.hardware.usb@1.0-service.aw \
 
-
+$(call inherit-product, $(LOCAL_PATH)/common/*/config.mk)
 
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
+PRODUCT_USE_DYNAMIC_PARTITION_SIZE := true
+

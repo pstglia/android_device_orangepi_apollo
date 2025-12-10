@@ -2,7 +2,7 @@ import /vendor/etc/init/hw/init.common.rc
 import /vendor/etc/init/hw/init.ram.rc
 
 # import module rc.
-import /vendor/etc/init/hw/init.sun50iw9p1.usb.rc
+import /vendor/etc/init/hw/init.apollo.usb.rc
 
 on early-init
     chown system system /proc/bootevent
@@ -38,9 +38,9 @@ on early-boot
 
 on fs
     write /proc/bootevent "INIT:Mount_START"
-    mount_all /vendor/etc/fstab.sun50iw9p1
+    mount_all /vendor/etc/fstab.apollo
     write /proc/bootevent "INIT:Mount_END"
-    swapon_all /vendor/etc/fstab.sun50iw9p1
+    swapon_all /vendor/etc/fstab.apollo
     restorecon_recursive /persist
 
 on post-fs

@@ -49,8 +49,8 @@ AB_OTA_PARTITIONS += \
 # Enable Virtual A/B
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
 endif
-TARGET_FSTAB := $(LOCAL_MODULE_PATH)/fstab.sun50iw9p1.temp
-$(shell cp $(LOCAL_MODULE_PATH)/fstab.sun50iw9p1 $(TARGET_FSTAB))
+TARGET_FSTAB := $(LOCAL_MODULE_PATH)/fstab.apollo.temp
+$(shell cp $(LOCAL_MODULE_PATH)/fstab.apollo $(TARGET_FSTAB))
 ifeq ($(PRODUCT_VIRTUAL_AB), false)
     $(shell sed -i 's/,slotselect//g' $(TARGET_FSTAB))
     $(shell sed -i '/userdata/i \/dev\/block\/by-name\/cache                               \/cache       ext4     noatime,nosuid,nodev,barrier=1,data=ordered,nomblk_io_submit,noauto_da_alloc,errors=panic wait,check,formattable' $(TARGET_FSTAB))
@@ -68,9 +68,9 @@ PRODUCT_COPY_FILES += \
 
 TARGET_RECOVERY_FSTAB := $(TARGET_FSTAB)
 PRODUCT_COPY_FILES += \
-    $(TARGET_FSTAB):$(TARGET_COPY_OUT_RAMDISK)/fstab.sun50iw9p1 \
-    $(TARGET_FSTAB):$(TARGET_COPY_OUT_VENDOR)/etc/fstab.sun50iw9p1 \
-    $(TARGET_FSTAB):$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.sun50iw9p1 \
+    $(TARGET_FSTAB):$(TARGET_COPY_OUT_RAMDISK)/fstab.apollo \
+    $(TARGET_FSTAB):$(TARGET_COPY_OUT_VENDOR)/etc/fstab.apollo \
+    $(TARGET_FSTAB):$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.apollo \
     $(TARGET_FSTAB):$(TARGET_COPY_OUT_VENDOR_RAMDISK)/system/etc/recovery.fstab \
 
 PRODUCT_PACKAGES += Update
