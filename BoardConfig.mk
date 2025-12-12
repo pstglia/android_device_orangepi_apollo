@@ -18,6 +18,8 @@ TARGET_BOARD_PLATFORM := apollo
 TARGET_BOARD_PLATFORM_GPU := mali-g31
 TARGET_ENFORCES_QSSI := true
 TARGET_PLATFORM := homlet
+$(call soong_config_add,vendor,board,$(TARGET_BOARD_PLATFORM))
+$(call soong_config_add,vendor,platform,$(TARGET_PLATFORM))
 
 TARGET_BOARD_CHIP := sun50iw9p1
 
@@ -176,9 +178,6 @@ TARGET_PROVIDES_KEYMASTER := true
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
-
-# QCOM
-BOARD_USES_QCOM_HARDWARE := true
 
 # Recovery
 BOARD_HAS_DOWNLOAD_MODE := true
