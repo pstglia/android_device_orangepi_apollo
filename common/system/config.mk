@@ -43,14 +43,8 @@ ifneq (,$(filter userdebug eng,$(TARGET_BUILD_VARIANT)))
 PRODUCT_DEBUG := true
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.sys.usb.config=adb \
-    ro.adb.secure=0 \
     ro.sys.dis_app_animation=true \
     service.adb.tcp.port=5555
-
-else
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.adb.secure=1 \
-
 endif
 
 # product properties
@@ -198,7 +192,7 @@ PRODUCT_COPY_FILES += \
 # low_ram device config
 # all devices got ram size equal to or less than 1GB should be defined as low ram device.
 # also we can get rid of the software limit, and fully use 2GB ram and config it as regular device.
-CONFIG_LOW_RAM_DEVICE ?= true
+CONFIG_LOW_RAM_DEVICE ?= false
 ifeq ($(CONFIG_LOW_RAM_DEVICE),true)
     # Reduces GC frequency of foreground apps by 50% (not recommanded for 512M devices)
     PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
@@ -220,10 +214,8 @@ ifeq ($(CONFIG_LOW_RAM_DEVICE),true)
         dalvik.vm.dex2oat-flags=--no-watch-dog \
         dalvik.vm.jit.codecachesize=0 \
         pm.dexopt.boot=verify \
-        dalvik.vm.heapstartsize=5m \
         dalvik.vm.heapsize=256m \
         dalvik.vm.heaptargetutilization=0.75 \
-        dalvik.vm.heapminfree=512k \
         dalvik.vm.heapmaxfree=8m \
 
     $(call inherit-product, device/orangepi/common/go_common.mk)
@@ -247,11 +239,9 @@ ifeq ($(CONFIG_LOW_RAM_DEVICE),true)
     PRODUCT_PACKAGES += Launcher3QuickStepGo
 else
     PRODUCT_PROPERTY_OVERRIDES += \
-        dalvik.vm.heapstartsize=5m \
         dalvik.vm.heapgrowthlimit=256m \
         dalvik.vm.heapsize=512m \
         dalvik.vm.heaptargetutilization=0.75 \
-        dalvik.vm.heapminfree=512k \
         dalvik.vm.heapmaxfree=8m
 
     $(call inherit-product, build/target/product/full_base.mk)

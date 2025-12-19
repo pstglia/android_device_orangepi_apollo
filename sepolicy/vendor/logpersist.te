@@ -1,2 +1,0 @@
-allow logpersist kernel:system syslog_read;
-allow logpersist kmsg_device:chr_file { open read };

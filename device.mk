@@ -49,7 +49,7 @@ BOARD_BLUETOOTH_CONFIG_DIR :=  device/orangepi/apollo/common/wireless/bluetooth
 BOARD_BLUETOOTH_TTY := /dev/ttyAS1
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/orangepi/apollo/common/wireless/bluetooth
 # Must include after wifi/bt configuration
-include device/orangepi/apollo/configs/wireless/wireless_config.mk
+include device/orangepi/common/config/wireless/wireless_config.mk
 
 # Desabilita cache
 PRODUCT_BUILD_CACHE_IMAGE := false

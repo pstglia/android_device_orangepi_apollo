@@ -35,7 +35,7 @@ PRODUCT_SYSTEM_NAME := apollo
 PRODUCT_SYSTEM_DEVICE := apollo
 
 
-#PRODUCT_GMS_CLIENTID_BASE := android-orangepi
+PRODUCT_GMS_CLIENTID_BASE := android-allwinner
 
 TARGET_VENDOR := orangepi
 TARGET_VENDOR_PRODUCT_NAME := apollo
