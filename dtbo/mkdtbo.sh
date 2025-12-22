@@ -76,6 +76,9 @@ function mkdtbo()
                 echo "don't build dtbo ..."
 		rm -rf ${DTBO_OUT_DIR_TMP} 2>/dev/null
         fi
+
+	# prebuilt dtb... (TODO: build it lazy )...
+	cp ${DEVICE_PATH}/dtbo/sunxi.dtb ${PRODUCT_OUT}/dtb.img
 }
 
 mkdtbo

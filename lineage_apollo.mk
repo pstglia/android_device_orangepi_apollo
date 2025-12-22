@@ -34,6 +34,7 @@ PRODUCT_MODEL := orangepizero3
 PRODUCT_SYSTEM_NAME := apollo
 PRODUCT_SYSTEM_DEVICE := apollo
 
+PRODUCT_BUILD_VENDOR_BOOT_IMAGE := true
 
 PRODUCT_GMS_CLIENTID_BASE := android-allwinner
 
