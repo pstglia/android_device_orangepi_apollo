@@ -115,12 +115,12 @@ PRODUCT_PACKAGES += \
 # call other makefile
 # 32bit android,you should define TARGET_ARCH := arm
 # 64bit android,you should define TARGET_ARCH := arm64
-#TARGET_ARCH ?= arm
-#ifeq ($(TARGET_ARCH),arm)
-#$(call inherit-product, $(LOCAL_MODULE_PATH)/apollo_32_bit.mk)
-#else ifeq ($(TARGET_ARCH),arm64)
-#$(call inherit-product, $(LOCAL_MODULE_PATH)/apollo_64_bit.mk)
-#endif
+TARGET_ARCH ?= arm
+ifeq ($(TARGET_ARCH),arm)
+$(call inherit-product, $(LOCAL_MODULE_PATH)/apollo_32_bit.mk)
+else ifeq ($(TARGET_ARCH),arm64)
+$(call inherit-product, $(LOCAL_MODULE_PATH)/apollo_64_bit.mk)
+endif
 
 #$(call inherit-product, device/orangepi/common/pad.mk)
 $(call inherit-product-if-exists, vendor/aw/public/tool.mk)

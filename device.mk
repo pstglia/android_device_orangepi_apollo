@@ -4,9 +4,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 #
-TARGET_BOARD_IC := h618
-PRODUCT_BOARD := p2
-PRODUCT_PREBUILT_PATH := longan/out/$(TARGET_BOARD_IC)/$(PRODUCT_BOARD)/android
+PRODUCT_PREBUILT_PATH := longan/out/h618/p2/android
 PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
 
 # Audio
