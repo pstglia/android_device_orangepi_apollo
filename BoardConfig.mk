@@ -32,7 +32,7 @@ PRODUCT_BOARD := p2
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 :=
+TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := cortex-a7
 
 #TARGET_2ND_ARCH := arm
@@ -48,6 +48,10 @@ WRITE_BACK_MODE := 0
 $(call soong_config_add,disp,writebackMode,$(WRITE_BACK_MODE))
 
 TARGET_USES_MKE2FS := true
+
+#BOARD_USES_RECOVERY_AS_BOOT := true
+BOARD_RAMDISK_USE_LZ4 := true
+#TARGET_NO_RECOVERY := true
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := apollo
@@ -168,10 +172,12 @@ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE=$(DEVICE_PATH)/common/system/compatib
 #TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 
 # Kernel
-BOARD_KERNEL_CMDLINE := androidboot.selinux=permissive androidboot.dtbo_idx=0,1,2 firmware_class.path=/vendor/etc/firmware
+BOARD_KERNEL_CMDLINE := earlycon=uart8250,mmio32,0x05000000 clk_ignore_unused initcall_debug=0 console=ttyAS0,115200 loglevel=8 root=/dev/mmcblk0p4 init=/init cma=8M
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive androidboot.dtbo_idx=0,1,2 firmware_class.path=/vendor/etc/firmware
 BOARD_KERNEL_CMDLINE += loop.max_part=4 androidboot.dynamic_partitions=true
 BOARD_KERNEL_CMDLINE += androidboot.dynamic_partitions_retrofit=true
-#BOARD_INCLUDE_RECOVERY_DTBO := true
+BOARD_KERNEL_CMDLINE += androidboot.slot_suffix=_a
+BOARD_INCLUDE_RECOVERY_DTBO := true
 #BOARD_KERNEL_SEPARATED_DTBO := true
 BOARD_KERNEL_DTB_OVERLAYS := $(wildcard $(DEVICE_PATH)/dtbo/h618/dtbo/*.dtbo)
 BOARD_BOOTIMG_HEADER_VERSION := 3
