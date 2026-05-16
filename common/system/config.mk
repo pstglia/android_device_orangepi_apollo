@@ -167,9 +167,12 @@ $(call inherit-product-if-exists, vendor/aw/public/prebuild/lib/librild/radio_co
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_MODULE_PATH)/init.recovery.apollo.rc:root/init.recovery.apollo.rc \
+    $(LOCAL_MODULE_PATH)/init.recovery.apollo.rc:root/init.recovery.sun50iw9p1.rc \
     $(LOCAL_MODULE_PATH)/init.recovery.apollo.rc:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/init.recovery.apollo.rc \
+    $(LOCAL_MODULE_PATH)/init.recovery.apollo.rc:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/init.recovery.sun50iw9p1.rc \
     $(LOCAL_MODULE_PATH)/ueventd.apollo.rc:$(TARGET_COPY_OUT_VENDOR)/ueventd.rc \
     $(LOCAL_MODULE_PATH)/init.apollo.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.apollo.rc \
+    $(LOCAL_MODULE_PATH)/init.apollo.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.sun50iw9p1.rc \
     $(LOCAL_MODULE_PATH)/init.apollo.usb.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.apollo.usb.rc \
     $(LOCAL_MODULE_PATH)/init.secondmodules.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.secondmodules.rc \
     $(LOCAL_MODULE_PATH)/init.scheduler.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.scheduler.rc \

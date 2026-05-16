@@ -177,6 +177,10 @@ BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive androidboot.dtbo_idx=0,1,
 BOARD_KERNEL_CMDLINE += loop.max_part=4 androidboot.dynamic_partitions=true
 BOARD_KERNEL_CMDLINE += androidboot.dynamic_partitions_retrofit=true
 BOARD_KERNEL_CMDLINE += androidboot.slot_suffix=_a
+BOARD_KERNEL_CMDLINE += androidboot.force_normal_boot=1
+BOARD_KERNEL_CMDLINE += androidboot.mode=normal
+BOARD_KERNEL_CMDLINE += androidboot.hardware=apollo
+
 BOARD_INCLUDE_RECOVERY_DTBO := true
 #BOARD_KERNEL_SEPARATED_DTBO := true
 BOARD_KERNEL_DTB_OVERLAYS := $(wildcard $(DEVICE_PATH)/dtbo/h618/dtbo/*.dtbo)
