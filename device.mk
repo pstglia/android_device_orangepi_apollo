@@ -71,23 +71,6 @@ PRODUCT_COPY_FILES += \
     $(PRODUCT_PREBUILT_PATH)/dist/wireless_switch.ko:vendor/lib/modules_longan/wireless_switch.ko \
     $(PRODUCT_PREBUILT_PATH)/dist/xr819.ko:vendor/lib/modules_longan/xr819.ko
 
-# wifi and bt configuration
-# 1. Wifi Configuration
-BOARD_WIFI_VENDOR := common
-BOARD_USR_WIFI    :=
-WIFI_DRIVER_MODULE_PATH :=
-WIFI_DRIVER_MODULE_NAME :=
-WIFI_DRIVER_MODULE_ARG  :=
-
-# 2. Bluetooth Configuration
-BOARD_BLUETOOTH_VENDOR    := common
-BOARD_HAVE_BLUETOOTH_NAME :=
-BOARD_BLUETOOTH_CONFIG_DIR :=  device/orangepi/apollo/common/wireless/bluetooth
-BOARD_BLUETOOTH_TTY := /dev/ttyAS1
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/orangepi/apollo/common/wireless/bluetooth
-# Must include after wifi/bt configuration
-include device/orangepi/common/config/wireless/wireless_config.mk
-
 # Desabilita cache
 PRODUCT_BUILD_CACHE_IMAGE := false
 

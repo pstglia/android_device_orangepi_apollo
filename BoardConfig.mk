@@ -268,6 +268,23 @@ WPA_SUPPLICANT_VERSION := VER_0_8_X
 WIFI_DRIVER_MODULE_PATH := "/vendor/lib/modules/pronto_wlan.ko"
 WIFI_DRIVER_MODULE_NAME := "pronto_wlan"
 
+# wifi and bt configuration
+# 1. Wifi Configuration
+BOARD_WIFI_VENDOR := common
+BOARD_USR_WIFI    :=
+WIFI_DRIVER_MODULE_PATH :=
+WIFI_DRIVER_MODULE_NAME :=
+WIFI_DRIVER_MODULE_ARG  :=
+
+# 2. Bluetooth Configuration
+BOARD_BLUETOOTH_VENDOR    := common
+BOARD_HAVE_BLUETOOTH_NAME :=
+BOARD_BLUETOOTH_CONFIG_DIR :=  device/orangepi/apollo/common/wireless/bluetooth
+BOARD_BLUETOOTH_TTY := /dev/ttyAS1
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/orangepi/apollo/common/wireless/bluetooth
+# Must include after wifi/bt configuration
+include device/orangepi/common/config/wireless/wireless_config.mk
+
 USE_OPENGL_RENDERER := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 2
 TARGET_USES_HWC2 := true
