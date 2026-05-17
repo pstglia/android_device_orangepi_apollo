@@ -52,7 +52,7 @@ on late-fs && property:ro.product.first_api_level=30
 
 on late-fs
     write /proc/bootevent "INIT:late-fs"
-	insmod /vendor/lib/modules/mali_kbase.ko
+	insmod /vendor/lib/modules_longan/mali_kbase.ko
 
 on post-fs-data
     write /proc/bootevent "INIT:post-fs-data"
@@ -108,7 +108,7 @@ on boot
     write /proc/sys/vm/page-cluster 0
 
 on property:sys.boot_completed=1
-    insmod /vendor/lib/modules/kheaders.ko
+    insmod /vendor/lib/modules_longan/kheaders.ko
     write /sys/class/thermal/thermal_zone0/policy power_allocator
     write /proc/sys/vm/drop_caches 3
     # Tweak background writeout
