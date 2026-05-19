@@ -1,1 +1,0 @@
-LICHEE_KERN_DEFCONF:=sun50iw9p1smp_h616_android_defconfig

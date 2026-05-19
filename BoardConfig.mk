@@ -50,7 +50,6 @@ $(call soong_config_add,disp,writebackMode,$(WRITE_BACK_MODE))
 TARGET_USES_MKE2FS := true
 
 BOARD_USES_RECOVERY_AS_BOOT := true
-BOARD_RAMDISK_USE_LZ4 := true
 TARGET_NO_RECOVERY := true
 
 # Assert
@@ -246,27 +245,6 @@ TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
 
 # Vendor files
 #include vendor/samsung/apollo/BoardConfigVendor.mk
-
-# Wifi
-BOARD_HAS_QCOM_WLAN := false
-BOARD_HAS_QCOM_WLAN_SDK := false
-BOARD_WLAN_DEVICE := common
-BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-BOARD_WIRELESS_PACKAGES     += libwifi-hal-package
--include hardware/aw/wireless/wlan/firmware/firmware.mk
-
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-BOARD_HOSTAPD_DRIVER := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-WIFI_DRIVER_FW_PATH_STA := "sta"
-WIFI_DRIVER_FW_PATH_AP  := "ap"
-WIFI_DRIVER_FW_PATH_P2P := "p2p"
-WIFI_DRIVER_OPERSTATE_PATH := "/sys/class/net/wlan0/operstate"
-WIFI_HIDL_FEATURE_DUAL_INTERFACE := true
-WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
-WPA_SUPPLICANT_VERSION := VER_0_8_X
-WIFI_DRIVER_MODULE_PATH := "/vendor/lib/modules/pronto_wlan.ko"
-WIFI_DRIVER_MODULE_NAME := "pronto_wlan"
 
 # wifi and bt configuration
 # 1. Wifi Configuration
