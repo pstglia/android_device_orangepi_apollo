@@ -141,6 +141,10 @@ PRODUCT_PACKAGES += \
     android.hardware.health@2.1-impl \
     android.hardware.usb@1.0-service.aw \
 
+# SU
+PRODUCT_PACKAGES += \
+    su
+
 $(call inherit-product, $(LOCAL_PATH)/common/*/config.mk)
 
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
