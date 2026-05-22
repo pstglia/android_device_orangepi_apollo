@@ -58,7 +58,6 @@ PRODUCT_COPY_FILES += \
     $(PRODUCT_PREBUILT_PATH)/dist/modules.softdep:vendor/lib/modules_longan/modules.softdep \
     $(PRODUCT_PREBUILT_PATH)/dist/modules.symbols:vendor/lib/modules_longan/modules.symbols \
     $(PRODUCT_PREBUILT_PATH)/dist/modules.symbols.bin:vendor/lib/modules_longan/modules.symbols.bin \
-    $(PRODUCT_PREBUILT_PATH)/dist/modules.weakdep:vendor/lib/modules_longan/modules.weakdep \
     $(PRODUCT_PREBUILT_PATH)/dist/Module.symvers:vendor/lib/modules_longan/Module.symvers \
     $(PRODUCT_PREBUILT_PATH)/dist/ohci-sunxi.ko:vendor/lib/modules_longan/ohci-sunxi.ko \
     $(PRODUCT_PREBUILT_PATH)/dist/rpcsec_gss_krb5.ko:vendor/lib/modules_longan/rpcsec_gss_krb5.ko \
