@@ -13,6 +13,7 @@ BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 
 DEVICE_PATH := device/orangepi/apollo
+DEVICE_DIR_PLUS := $(DEVICE_PATH)/apollo-p2
 
 # Platform
 BOARD_VENDOR := Allwinner
@@ -23,10 +24,23 @@ TARGET_PLATFORM := homlet
 $(call soong_config_add,vendor,board,$(TARGET_BOARD_PLATFORM))
 $(call soong_config_add,vendor,platform,$(TARGET_PLATFORM))
 
+TARGET_BOARD_KERN_VER := 5.4
 TARGET_BOARD_CHIP := sun50iw9p1
 TARGET_BOARD_IC := h618
 PRODUCT_BOARD := p2
+TARGET_BOOTLOADER_BOARD_NAME := exdroid
+TARGET_BOOTLOADER_NAME := exdroid
+TARGET_OTA_RESTORE_BOOT_STORAGE_DATA := true
 
+# Enable dex-preoptimization to speed up first boot sequence
+WITH_DEXPREOPT := true
+DONT_DEXPREOPT_PREBUILTS := false
+TARGET_USE_NEON_OPTIMIZATION := true
+
+TARGET_CPU_SMP := true
+
+#Reserve0
+BOARD_ROOT_EXTRA_FOLDERS += Reserve0
 
 # Architecture
 TARGET_ARCH := arm
@@ -55,40 +69,19 @@ TARGET_NO_RECOVERY := true
 # Assert
 TARGET_OTA_ASSERT_DEVICE := apollo
 
-BOARD_ADD_PACK_CONFIG += $(TARGET_DEVICE_DIR)/system/sys_partition.fex
-BOARD_ADD_PACK_CONFIG += $(PRODUCT_PLATFORM_PATH)/common/system/env.cfg
-BOARD_ADD_PACK_CONFIG += $(TARGET_DEVICE_DIR)/system/dragon_toc.cfg
-
-
-# Audio
-AUDIO_FEATURE_ENABLED_AHAL_EXT := false
-AUDIO_FEATURE_ENABLED_DYNAMIC_ECNS := false
-AUDIO_FEATURE_ENABLED_EXTENDED_COMPRESS_FORMAT := true
-AUDIO_FEATURE_ENABLED_EXTN_FORMATS := true
-AUDIO_FEATURE_ENABLED_FFV := false
-AUDIO_FEATURE_ENABLED_HW_ACCELERATED_EFFECTS := false
-AUDIO_FEATURE_ENABLED_KEEP_ALIVE_ARM_FFV := false
-AUDIO_FEATURE_ENABLED_PROXY_DEVICE := true
-BOARD_SUPPORTS_SOUND_TRIGGER := true
-BOARD_USES_ALSA_AUDIO := true
-USE_CUSTOM_AUDIO_POLICY := 1
+BOARD_ADD_PACK_CONFIG += $(DEVICE_DIR_PLUS)/system/sys_partition.fex
+BOARD_ADD_PACK_CONFIG += $(DEVICE_PATH)/common/system/env.cfg
+BOARD_ADD_PACK_CONFIG += $(DEVICE_DIR_PLUS)/system/dragon_toc.cfg
 
 # AVB
 BOARD_AVB_ENABLE := true
-BOARD_AVB_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
-BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --set_hashtree_disabled_flag
-BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 2
-BOARD_AVB_RECOVERY_ALGORITHM := SHA256_RSA4096
-BOARD_AVB_RECOVERY_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
-BOARD_AVB_RECOVERY_ROLLBACK_INDEX := 1
-BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 1
+BOARD_AVB_ALGORITHM := SHA256_RSA2048
+BOARD_AVB_KEY_PATH := vendor/security/toc_keys/SCPFirmwareContentCertPK.pem
 
-BOARD_AVB_VBMETA_VENDOR := vendor
-BOARD_AVB_VBMETA_VENDOR_KEY_PATH := vendor/security/toc_keys/SCPFirmwareContentCertPK.pem
-BOARD_AVB_VBMETA_VENDOR_ALGORITHM := SHA256_RSA2048
-BOARD_AVB_VBMETA_VENDOR_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
-BOARD_AVB_VBMETA_VENDOR_ROLLBACK_INDEX_LOCATION := 2
-BOARD_AVB_VENDOR_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
+# Using sha256 for dm-verity partitions.
+# product, vendor_dlkm
+BOARD_AVB_PRODUCT_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
+BOARD_AVB_VENDOR_DLKM_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
 
 BOARD_AVB_VBMETA_SYSTEM := system
 BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := vendor/security/toc_keys/SCPFirmwareContentCertPK.pem
@@ -97,10 +90,18 @@ BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 1
 BOARD_AVB_SYSTEM_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
 
+BOARD_AVB_VBMETA_VENDOR := vendor
+BOARD_AVB_VBMETA_VENDOR_KEY_PATH := vendor/security/toc_keys/SCPFirmwareContentCertPK.pem
+BOARD_AVB_VBMETA_VENDOR_ALGORITHM := SHA256_RSA2048
+BOARD_AVB_VBMETA_VENDOR_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
+BOARD_AVB_VBMETA_VENDOR_ROLLBACK_INDEX_LOCATION := 2
+BOARD_AVB_VENDOR_ADD_HASHTREE_FOOTER_ARGS += --hash_algorithm sha256
+
 BOARD_AVB_RECOVERY_KEY_PATH := vendor/security/toc_keys/SCPFirmwareContentCertPK.pem
 BOARD_AVB_RECOVERY_ALGORITHM := SHA256_RSA2048
 BOARD_AVB_RECOVERY_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
 BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 3
+
 
 # boot
 BOARD_BOOT_HEADER_VERSION ?= 3
@@ -109,28 +110,16 @@ ifeq ($(PRODUCT_BUILD_VENDOR_BOOT_IMAGE),true)
     BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 33554432
     # BOARD_VENDOR_RAMDISK_KERNEL_MODULES will copied to vendor-ramdisk/lib/modules
     BOARD_VENDOR_RAMDISK_KERNEL_MODULES := \
-        $(patsubst %.ko,$(PRODUCT_PREBUILT_PATH)/dist/%.ko,$(shell cat device/orangepi/apollo/system/vendor_ramdisk.modules | sed 's/^\s\+//g;s/\s\+$$//g;/^#/d;/^$$/d'))
+        $(patsubst %.ko,$(PRODUCT_PREBUILT_PATH)/dist/%.ko,$(shell cat $(DEVICE_DIR_PLUS)/system/vendor_ramdisk.modules | sed 's/^\s\+//g;s/\s\+$$//g;/^#/d;/^$$/d'))
 endif
-
-# Board
-TARGET_BOARD_INFO_FILE := $(DEVICE_PATH)/board-info.txt
-TARGET_BOOTLOADER_BOARD_NAME := exdroid
-TARGET_NO_BOOTLOADER := true
 
 BOARD_USES_VENDORIMAGE := true
 
 # Camera
-TARGET_USES_QTI_CAMERA_DEVICE := true
-
-# DRM
-TARGET_ENABLE_MEDIADRM_64 := true
+PRODUCT_HAS_UVC_CAMERA := true
 
 # Graphics
-TARGET_USES_GRALLOC1 := true
 TARGET_USES_HWC2 := true
-TARGET_USES_ION := true
-TARGET_USES_ALIGNED_YCBCR_HEIGHT := true
-TARGET_USES_YCRCB_CAMERA_PREVIEW := true
 
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
@@ -162,23 +151,19 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_COPY_OUT_VENDOR := vendor
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
 
-BOARD_ROOT_EXTRA_FOLDERS := efs
+# Enable SVELTE malloc
+MALLOC_SVELTE := true
 
 # HIDL
-DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
+DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/manifest.xml
 DEVICE_MATRIX_FILE := $(DEVICE_PATH)/common/system/compatibility_matrix.xml
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE=$(DEVICE_PATH)/common/system/compatibility_matrix_product.xml
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE=$(DEVICE_PATH)/common/system/compatibility_matrix_product.xml
 #TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 
 # Kernel
-BOARD_KERNEL_CMDLINE := earlycon=uart8250,mmio32,0x05000000 clk_ignore_unused initcall_debug=0 console=ttyAS0,115200 loglevel=8 root=/dev/mmcblk0p4 init=/init cma=8M
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive androidboot.dtbo_idx=0,1,2 firmware_class.path=/vendor/etc/firmware
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_CMDLINE += loop.max_part=4 androidboot.dynamic_partitions=true
 BOARD_KERNEL_CMDLINE += androidboot.dynamic_partitions_retrofit=true
-BOARD_KERNEL_CMDLINE += androidboot.slot_suffix=_a
-BOARD_KERNEL_CMDLINE += androidboot.force_normal_boot=1
-BOARD_KERNEL_CMDLINE += androidboot.mode=normal
-BOARD_KERNEL_CMDLINE += androidboot.hardware=apollo
 
 BOARD_INCLUDE_RECOVERY_DTBO := true
 #BOARD_KERNEL_SEPARATED_DTBO := true
@@ -209,28 +194,9 @@ BOARD_SUPER_PARTITION_GROUPS := sb
 BOARD_SB_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 8388608)
 BOARD_SB_PARTITION_LIST := system vendor product vendor_dlkm
 
-# Keymaster
-TARGET_PROVIDES_KEYMASTER := true
-
-# Lights
-TARGET_PROVIDES_LIBLIGHT := true
-
-# Recovery
-BOARD_HAS_DOWNLOAD_MODE := true
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
-TARGET_RECOVERY_PIXEL_FORMAT := BGRA_8888
-
-# Security patch level
-VENDOR_SECURITY_PATCH := 2022-07-01
-
-# SELinux
-#include device/qcom/sepolicy-legacy-um/SEPolicy.mk
-#BOARD_SEPOLICY_DIRS += device/orangepi/common/sepolicy/vendor
+TARGET_USERIMAGES_USE_F2FS ?= true
 
 # Treble
-BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
-PRODUCT_FULL_TREBLE_OVERRIDE := true
-PRODUCT_VENDOR_MOVE_ENABLED := true
 BOARD_VNDK_VERSION := current
 
 # product.img
@@ -255,7 +221,8 @@ WIFI_DRIVER_MODULE_NAME :=
 WIFI_DRIVER_MODULE_ARG  :=
 
 # 2. Bluetooth Configuration
-BOARD_BLUETOOTH_VENDOR    := common
+BOARD_HAVE_BLUETOOTH := false
+BOARD_BLUETOOTH_VENDOR    := disabled
 BOARD_HAVE_BLUETOOTH_NAME :=
 BOARD_BLUETOOTH_CONFIG_DIR :=  device/orangepi/apollo/common/wireless/bluetooth
 BOARD_BLUETOOTH_TTY := /dev/ttyAS1
@@ -269,21 +236,6 @@ TARGET_USES_HWC2 := true
 TARGET_GPU_TYPE := mali-g31
 USE_IOMMU := true
 
-# AB
-AB_OTA_UPDATER := true
-AB_OTA_PARTITIONS += \
-    boot \
-    dtbo \
-#    recovery \
-
-AB_OTA_PARTITIONS += \
-    product \
-    system \
-    vendor \
-    vendor_dlkm \
-
-AB_OTA_PARTITIONS += \
-    vbmeta
 
 include hardware/aw/gpu/product_config.mk
 include vendor/aw/homlet/HomletBoardConfig.mk

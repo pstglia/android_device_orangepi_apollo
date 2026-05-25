@@ -76,6 +76,7 @@ PRODUCT_COPY_FILES += \
     $(TARGET_FSTAB):$(TARGET_COPY_OUT_VENDOR)/etc/fstab.sun50iw9p1 \
     $(TARGET_FSTAB):$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.sun50iw9p1 \
     $(TARGET_FSTAB):$(TARGET_COPY_OUT_VENDOR_RAMDISK)/system/etc/recovery.sun50iw9p1 \
+    $(TARGET_FSTAB):$(TARGET_COPY_OUT_VENDOR_RAMDISK)/system/etc/recovery.apollo \
 
 PRODUCT_PACKAGES += Update
 

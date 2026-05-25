@@ -39,14 +39,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.camera.uvc.fourcc=0
 
 PRODUCT_COPY_FILES += \
-    device/softwinner/apollo/common/camera/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml \
+    device/orangepi/apollo/common/camera/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml \
     frameworks/native/data/etc/android.hardware.camera.external.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.external.xml
 
-DEVICE_MANIFEST_FILE += $(PRODUCT_PLATFORM_PATH)/common/camera/external_camera_manifest.xml
+DEVICE_MANIFEST_FILE += device/orangepi/apollo/common/camera/external_camera_manifest.xml
 else
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.camera.enableLazyHal=true
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-service-lazy
-DEVICE_MANIFEST_FILE += $(PRODUCT_PLATFORM_PATH)/common/camera/camera_manifest.xml
+DEVICE_MANIFEST_FILE += device/orangepi/apollo/common/camera/camera_manifest.xml
 endif

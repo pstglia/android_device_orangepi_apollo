@@ -21,7 +21,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 $(call inherit-product, $(LOCAL_PATH)/device.mk)
 
 # Inherit some common Lineage stuff
-$(call inherit-product, vendor/lineage/config/common_full_tv.mk)
+$(call inherit-product, vendor/lineage/config/common_full_tablet_wifionly.mk)
 
 PRODUCT_CHARACTERISTICS := tablet
 
@@ -32,8 +32,6 @@ PRODUCT_NAME := lineage_apollo
 PRODUCT_MODEL := orangepizero3
 PRODUCT_SYSTEM_NAME := apollo
 PRODUCT_SYSTEM_DEVICE := apollo
-
-PRODUCT_BUILD_VENDOR_BOOT_IMAGE := true
 
 PRODUCT_GMS_CLIENTID_BASE := android-allwinner
 

@@ -31,8 +31,8 @@ PRODUCT_PACKAGES += \
 
 #display - hdmi-hdcp2.2
 PRODUCT_COPY_FILES += \
-    device/softwinner/apollo/common/display/esm.fex:$(TARGET_COPY_OUT_VENDOR)/etc/hdcp/esm.fex \
-    device/softwinner/apollo/common/display/hdcptool.sh:$(TARGET_COPY_OUT_VENDOR)/bin/hdcptool.sh
+    device/orangepi/apollo/common/display/esm.fex:$(TARGET_COPY_OUT_VENDOR)/etc/hdcp/esm.fex \
+    device/orangepi/apollo/common/display/hdcptool.sh:$(TARGET_COPY_OUT_VENDOR)/bin/hdcptool.sh
 
 
 # display - hdmi-cec

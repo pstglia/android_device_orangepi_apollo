@@ -8,7 +8,6 @@ on early-init
     chown system system /proc/bootevent
     chmod 0666 /proc/bootevent
     write /proc/bootevent "INIT:early-init"
-    setprop ro.crypto.state unsupported
 
 on init
     # Set permissions for persist partition
