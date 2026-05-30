@@ -73,6 +73,10 @@ PRODUCT_COPY_FILES += \
     $(PRODUCT_PREBUILT_PATH)/dist/wireless_switch.ko:vendor/lib/modules_longan/wireless_switch.ko \
     $(PRODUCT_PREBUILT_PATH)/dist/xr819.ko:vendor/lib/modules_longan/xr819.ko
 
+# Copia layout do teclado padrao
+PRODUCT_COPY_FILES += \
+    device/orangepi/apollo/keylayout/Vendor_1a2c_Product_2d23.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/Vendor_1a2c_Product_2d23.kl
+
 # Desabilita cache
 PRODUCT_BUILD_CACHE_IMAGE := false
 
