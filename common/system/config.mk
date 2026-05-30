@@ -73,10 +73,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.soc.manufacturer=Allwinner \
     ro.soc.model=H618
 
-#systemui hide navigation
-PRODUCT_PROPERTY_OVERRIDES += \
-       qemu.hw.mainkeys = 1
-
 # theme overlay
 PRODUCT_PACKAGES += GoogleSearchGoOverlay
 PRODUCT_PACKAGES += AwAccentColorOverlay
@@ -179,7 +175,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     device/orangepi/common/config/awbms_config:$(TARGET_COPY_OUT_VENDOR)/etc/awbms_config \
-    device/orangepi/common/config/tv_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/tv_core_hardware.xml \
+    device/orangepi/common/config/orangepi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/orangepi.xml \
     frameworks/native/data/etc/android.software.controls.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.controls.xml \
     $(LOCAL_MODULE_PATH)/preferred-apps/custom.xml:system/etc/preferred-apps/custom.xml \
     device/orangepi/common/config/android.hardware.location.network.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.location.network.xml \
@@ -251,8 +247,5 @@ else
 
     # Mainline partner build config - updatable APEX
     MAINLINE_INCLUDE_WIFI_MODULE := false
-
-    # launcher
-    PRODUCT_PACKAGES += Launcher3QuickStep
 
 endif
