@@ -150,6 +150,7 @@ BOARD_FLASH_BLOCK_SIZE := 4096
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_COPY_OUT_VENDOR := vendor
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_USES_METADATA_PARTITION ?= true
 
 # Enable SVELTE malloc
 MALLOC_SVELTE := true
@@ -162,8 +163,8 @@ DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE=$(DEVICE_PATH)/common/system/compatibil
 
 # Kernel
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
-BOARD_KERNEL_CMDLINE += loop.max_part=4 androidboot.dynamic_partitions=true
-BOARD_KERNEL_CMDLINE += androidboot.dynamic_partitions_retrofit=true
+BOARD_KERNEL_CMDLINE += androidboot.dtbo_idx=0,1,2
+BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/etc/firmware
 
 BOARD_INCLUDE_RECOVERY_DTBO := true
 #BOARD_KERNEL_SEPARATED_DTBO := true
@@ -221,8 +222,8 @@ WIFI_DRIVER_MODULE_NAME :=
 WIFI_DRIVER_MODULE_ARG  :=
 
 # 2. Bluetooth Configuration
-BOARD_HAVE_BLUETOOTH := false
-BOARD_BLUETOOTH_VENDOR    := disabled
+BOARD_HAVE_BLUETOOTH := true
+BOARD_BLUETOOTH_VENDOR    := common
 BOARD_HAVE_BLUETOOTH_NAME :=
 BOARD_BLUETOOTH_CONFIG_DIR :=  device/orangepi/apollo/common/wireless/bluetooth
 BOARD_BLUETOOTH_TTY := /dev/ttyAS1
@@ -235,6 +236,9 @@ NUM_FRAMEBUFFER_SURFACE_BUFFERS := 2
 TARGET_USES_HWC2 := true
 TARGET_GPU_TYPE := mali-g31
 USE_IOMMU := true
+
+# ensure metadata uses 256 inode (avoit 2038 warning)
+BOARD_METADATAIMAGE_MKFS_OPTIONS := -I 256
 
 
 include hardware/aw/gpu/product_config.mk
