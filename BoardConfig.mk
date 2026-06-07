@@ -23,6 +23,7 @@ TARGET_ENFORCES_QSSI := true
 TARGET_PLATFORM := homlet
 $(call soong_config_add,vendor,board,$(TARGET_BOARD_PLATFORM))
 $(call soong_config_add,vendor,platform,$(TARGET_PLATFORM))
+$(call soong_config_add,widevine,cryptolevel,$(BOARD_WIDEVINE_OEMCRYPTO_LEVEL))
 
 TARGET_BOARD_KERN_VER := 5.4
 TARGET_BOARD_CHIP := sun50iw9p1
